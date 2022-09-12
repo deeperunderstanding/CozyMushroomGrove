@@ -2,11 +2,12 @@
 
 [resource]
 flags_vertex_lighting = true
+flags_do_not_receive_shadows = true
+vertex_color_use_as_albedo = true
 params_diffuse_mode = 2
 params_specular_mode = 4
 params_blend_mode = 1
 params_cull_mode = 2
-params_point_size = 2.0
 params_billboard_mode = 3
 params_billboard_keep_scale = true
 particles_anim_h_frames = 1

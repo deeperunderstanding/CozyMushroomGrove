@@ -4,7 +4,7 @@
 
 [resource]
 params_diffuse_mode = 1
-params_specular_mode = 1
+params_specular_mode = 4
 params_use_alpha_scissor = true
 params_alpha_scissor_threshold = 0.3
 albedo_texture = ExtResource( 1 )

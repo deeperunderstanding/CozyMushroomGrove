@@ -6,6 +6,8 @@ var throw_power = 0
 
 var interactor = null
 
+onready var mushrooms = $Mushrooms
+
 # this was supposedd to be for fall damage, not sure if works
 var last_floor_height
 var can_change_last_floor_height = true
@@ -45,7 +47,7 @@ var gravity = -40
 const ACCEL = 0.5
 const DEACCEL = 0.8
 
-const JUMP_STR = 30
+const JUMP_STR = 15
 
 # Ladder
 var on_ladder = false
@@ -282,25 +284,16 @@ func _input(event):
 
 	# If already carries an object - release it, otherwise (if ray is colliding) pick an object up
 	if Input.is_action_just_pressed("pick_up"):
-		if carried_object != null:
-			carried_object.drop()
-			carried_object = null
-		else:
-			if $Yaw/Camera/InteractionRay.is_colliding():
-				var x = $Yaw/Camera/InteractionRay.get_collider()
-				if x.has_method("pick_up"):
-					x.pick_up(self)
-					carried_object = x
+
+		if $Yaw/Camera/InteractionRay.is_colliding():
+			var x = $Yaw/Camera/InteractionRay.get_collider()
+			if x.has_method("pick_up"):
+				x.pick_up(self)
 
 	# Hold Left Mouse Button (LMB) to throw carried object
 	if Input.is_action_just_released("LMB"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-		if carried_object != null:
-			carried_object.throw(throw_power)
-		throw_power = 0
-
 
 
 	_interact()

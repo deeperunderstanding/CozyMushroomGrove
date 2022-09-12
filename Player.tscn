@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://MushroomReceiver.gd" type="Script" id=2]
 [ext_resource path="res://DebugUI.gd" type="Script" id=3]
 [ext_resource path="res://PlayerArm.tscn" type="PackedScene" id=4]
 [ext_resource path="res://SkeletonIKAutoStart.gd" type="Script" id=5]
@@ -135,7 +136,7 @@ shadow_atlas_size = 256
 [node name="Camera" type="Camera" parent="ViewportContainer/Viewport"]
 cull_mask = 1048573
 current = true
-far = 500.0
+far = 200.0
 
 [node name="RigViewportContainer" type="ViewportContainer" parent="."]
 visible = false
@@ -181,7 +182,7 @@ enabled = true
 [node name="Camera" type="Camera" parent="Yaw"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 cull_mask = 3
-current = true
+far = 200.0
 
 [node name="Item_Holder" type="Spatial" parent="Yaw/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.584962, -0.714723, -1.12066 )
@@ -199,6 +200,7 @@ collision_mask = 3
 
 [node name="PlayerArm" parent="Yaw/Camera" instance=ExtResource( 4 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.4328, -0.470847, 0 )
+visible = false
 
 [node name="Hand" parent="Yaw/Camera/PlayerArm/Armature/Skeleton" index="0"]
 layers = 2
@@ -224,11 +226,6 @@ transform = Transform( 0.995374, -0.0959909, 0.00393594, 0, 0.0409688, 0.99916, 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02655, -0.624282 )
 enabled = true
 cast_to = Vector3( 0, -0.5, 0 )
-
-[node name="Pointer" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.392157 )
-position = Vector2( 800, 450 )
-scale = Vector2( 0.1, 0.1 )
 
 [node name="crouching" type="AnimationPlayer" parent="."]
 anims/crouch = SubResource( 6 )
@@ -300,6 +297,10 @@ margin_bottom = 122.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Mushrooms" type="Spatial" parent="."]
+transform = Transform( 0.999824, -0.0187437, 0, 0.0187437, 0.999824, 0, 0, 0, 1, 0, 2.99818, -2.5121 )
+script = ExtResource( 2 )
 
 [connection signal="animation_finished" from="crouching" to="." method="_on_crouching_animation_finished"]
 [connection signal="body_entered" from="HighQuality" to="." method="_on_HighQuality_body_entered"]
