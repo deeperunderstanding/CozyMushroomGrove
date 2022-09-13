@@ -6,16 +6,15 @@ signal next
 signal done
 
 var recipes = [
-	Recipes.SimpleQuantityRecipe.new({
-		Mushroom.Types.Xylo : 1,
-		Mushroom.Types.Amani : 2,
-		Mushroom.Types.TreeDude: 0 
-	}),
-	Recipes.SimpleQuantityRecipe.new({ 
-		Mushroom.Types.Xylo : 0,
-		Mushroom.Types.Amani : 1,
-		Mushroom.Types.TreeDude: 2 
-	})
+	#Recipes.SimpleQuantityRecipe.new({
+	#	Mushroom.Types.Xylo : 1,
+	#	Mushroom.Types.Amani : 2
+	#}, "Pharos Potions"),
+	Recipes.OrderedQuantityRecipe.new([
+		Mushroom.Types.TreeDude, 
+		Mushroom.Types.TreeDude,
+		Mushroom.Types.Amani
+	], "Anubis Scent")
 ]
 
 

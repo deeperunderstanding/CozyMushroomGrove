@@ -3,7 +3,7 @@
 // that they need an Internet connection to run the project if desired.
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
-const CACHE_VERSION = "1663050848|23381399891";
+const CACHE_VERSION = "1663083972|50967848880";
 const CACHE_PREFIX = "CozyAutumnJam202-sw-cache-";
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
 const OFFLINE_URL = "CozyAutumnJam2022.offline.html";

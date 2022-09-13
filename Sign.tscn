@@ -9,10 +9,11 @@ script = ExtResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+cast_shadow = 0
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 3 )
 
 [node name="TextStart" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, 0.01 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1.29562, 0.01 )
 
 [node name="Lines" type="Spatial" parent="."]

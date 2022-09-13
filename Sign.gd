@@ -3,6 +3,7 @@ tool extends Spatial
 
 onready var line_template = preload("res://SignTextLine.tscn")
 
+export var pixel_size = 0.01
 export var initial_lines : Array = [
 	"Hello",
 	"This is a Recipe:",
@@ -25,6 +26,7 @@ func render_lines(lines):
 		if text:
 			var line = line_template.instance()
 			line.mesh.text = text
+			line.mesh.pixel_size = pixel_size
 			$Lines.add_child(line)
 			line.global_transform.origin = $TextStart.global_transform.origin + Vector3(0, -i * 0.2, 0)
 		i += 1
