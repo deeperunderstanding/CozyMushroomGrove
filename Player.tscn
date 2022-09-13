@@ -12,7 +12,8 @@ radius = 0.6
 mid_height = 2.0
 
 [sub_resource type="SpatialMaterial" id=4]
-metallic_specular = 0.4
+flags_unshaded = true
+flags_do_not_receive_shadows = true
 
 [sub_resource type="CapsuleShape" id=5]
 radius = 0.6

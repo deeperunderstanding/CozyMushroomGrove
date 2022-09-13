@@ -3,16 +3,26 @@ extends StaticBody
 signal recipe_success
 signal recipe_failure
 
+var interacting = false
+
 var recipe = Recipes.Recipe.new()
 
 func interact(actor):
-	var mush : Spatial = actor.mushrooms.pop()
-	if mush:
-		$MushroomHolder.add_child(mush)
-		#todo move mushroom into cauldron, and remove it after validatong recipe
-		mush.visible = true
-		mush.global_transform.origin = $MushroomHolder.global_transform.origin
-		_validate_recipe(mush)
+	if not interacting:
+		interacting = true
+	
+		var mush : Spatial = actor.mushrooms.pop()
+		if mush:
+			$MushroomHolder.add_child(mush)
+			mush.scale = Vector3(0.5, 0.5, 0.5)
+			mush.visible = true
+			mush.global_transform.origin = $MushroomHolder.global_transform.origin
+			$AnimationPlayer.play("add_mushroom")
+			yield($AnimationPlayer, "animation_finished")
+			_validate_recipe(mush)
+			mush.queue_free()
+
+		interacting = false
 
 
 func _validate_recipe(mush : Mushroom):

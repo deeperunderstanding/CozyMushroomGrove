@@ -1,6 +1,8 @@
 extends KinematicBody
 class_name Player
 
+signal interact
+
 var carried_object = null
 var throw_power = 0
 
@@ -289,6 +291,7 @@ func _input(event):
 			var x = $Yaw/Camera/InteractionRay.get_collider()
 			if x.has_method("pick_up"):
 				x.pick_up(self)
+		
 
 	# Hold Left Mouse Button (LMB) to throw carried object
 	if Input.is_action_just_released("LMB"):

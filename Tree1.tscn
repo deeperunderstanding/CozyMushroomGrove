@@ -19,26 +19,28 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id=3]
 material = SubResource( 2 )
-size = Vector2( 0.2, 0.2 )
+size = Vector2( 0.3, 0.3 )
 
 [sub_resource type="CylinderShape" id=4]
 height = 20.0
 radius = 8.0
 
-[node name="Tree_Test1" type="MeshInstance"]
+[node name="Spatial" type="Spatial"]
+
+[node name="Tree_Test1" type="MeshInstance" parent="."]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 2 )
 
-[node name="StaticBody" type="StaticBody" parent="."]
+[node name="StaticBody" type="StaticBody" parent="Tree_Test1"]
 
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="Tree_Test1/StaticBody"]
 shape = SubResource( 1 )
 
-[node name="CPUParticles" type="CPUParticles" parent="."]
+[node name="CPUParticles" type="CPUParticles" parent="Tree_Test1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.37172, 13.0259, 0 )
 cast_shadow = 0
-amount = 3
+amount = 4
 lifetime = 7.0
 randomness = 0.5
 local_coords = false
@@ -50,9 +52,9 @@ angular_velocity = 3.0
 linear_accel = 2.0
 color = Color( 1, 0.356863, 0.309804, 1 )
 
-[node name="Area" type="Area" parent="."]
+[node name="Area" type="Area" parent="Tree_Test1"]
 monitorable = false
 
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
+[node name="CollisionShape" type="CollisionShape" parent="Tree_Test1/Area"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.316957, 9.80087, 0 )
 shape = SubResource( 4 )

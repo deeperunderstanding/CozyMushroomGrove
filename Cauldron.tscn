@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Models/Cauldron.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Cauldron.gd" type="Script" id=2]
@@ -35,6 +35,36 @@ font_data = ExtResource( 4 )
 [sub_resource type="TextMesh" id=3]
 text = "Test"
 font = SubResource( 35 )
+
+[sub_resource type="Animation" id=36]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MushroomHolder:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 3.4954, 0 ) ]
+}
+
+[sub_resource type="Animation" id=37]
+resource_name = "add_mushroom"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MushroomHolder:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 3.77278, 0 ), Vector3( 0, 1.99875, 0 ) ]
+}
 
 [node name="Cauldron" type="StaticBody"]
 script = ExtResource( 2 )
@@ -73,3 +103,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4954, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.61626, -2.04775 )
 visible = false
 mesh = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 36 )
+anims/add_mushroom = SubResource( 37 )
