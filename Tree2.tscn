@@ -2,20 +2,10 @@
 
 [ext_resource path="res://Models/Tree_3.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://StandardMaterial.tres" type="Material" id=2]
-
-[sub_resource type="SpatialMaterial" id=2]
-flags_vertex_lighting = true
-flags_do_not_receive_shadows = true
-vertex_color_use_as_albedo = true
-params_diffuse_mode = 2
-params_specular_mode = 1
-params_billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
+[ext_resource path="res://LeafParticleShader.tres" type="Material" id=3]
 
 [sub_resource type="QuadMesh" id=3]
-material = SubResource( 2 )
+material = ExtResource( 3 )
 size = Vector2( 0.5, 0.5 )
 
 [sub_resource type="CylinderShape" id=4]

@@ -8,13 +8,13 @@ func _ready():
 
 
 func add(mushroom : Spatial):
-	mushroom.visible = false
-	add_child(mushroom)
+	#mushroom.visible = false
+	#add_child(mushroom)
 	_queue.push_back(mushroom)
-	mushroom.global_transform.origin = global_transform.origin
+	#mushroom.global_transform.origin = global_transform.origin
 
 func pop():
 	var mushroom = _queue.pop_back()
 	if mushroom:
-		remove_child(mushroom)
+		pass#remove_child(mushroom)
 	return mushroom

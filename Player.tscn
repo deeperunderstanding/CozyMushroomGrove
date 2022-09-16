@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://MushroomReceiver.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://PlayerArm.tscn" type="PackedScene" id=4]
 [ext_resource path="res://SkeletonIKAutoStart.gd" type="Script" id=5]
 [ext_resource path="res://GenericNoisySurfaceMaterial.tres" type="Material" id=6]
+[ext_resource path="res://DawnbreakerFont.tres" type="DynamicFont" id=7]
 
 [sub_resource type="CapsuleMesh" id=3]
 radius = 0.6
@@ -183,7 +184,7 @@ enabled = true
 [node name="Camera" type="Camera" parent="Yaw"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 cull_mask = 3
-far = 200.0
+far = 300.0
 
 [node name="Item_Holder" type="Spatial" parent="Yaw/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.584962, -0.714723, -1.12066 )
@@ -302,6 +303,38 @@ __meta__ = {
 [node name="Mushrooms" type="Spatial" parent="."]
 transform = Transform( 0.999824, -0.0187437, 0, 0.0187437, 0.999824, 0, 0, 0, 1, 0, 2.99818, -2.5121 )
 script = ExtResource( 2 )
+
+[node name="UI" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Middle" type="VBoxContainer" parent="UI"]
+margin_right = 1024.0
+margin_bottom = 600.0
+mouse_filter = 2
+alignment = 2
+
+[node name="Middle" type="HBoxContainer" parent="UI/Middle"]
+margin_top = 549.0
+margin_right = 1024.0
+margin_bottom = 600.0
+mouse_filter = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Middle/Middle"]
+margin_left = 432.0
+margin_right = 592.0
+margin_bottom = 51.0
+custom_constants/margin_bottom = 16
+
+[node name="BottomText" type="Label" parent="UI/Middle/Middle/MarginContainer"]
+unique_name_in_owner = true
+margin_right = 160.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 7 )
+text = "YOU FAILED
+GET LOSt"
 
 [connection signal="animation_finished" from="crouching" to="." method="_on_crouching_animation_finished"]
 [connection signal="body_entered" from="HighQuality" to="." method="_on_HighQuality_body_entered"]

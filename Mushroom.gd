@@ -2,29 +2,31 @@ extends StaticBody
 class_name Mushroom
 
 enum Types {
-	Xylo, Amani, TreeDude
+	Philosopher, Amoneeto, TreeRot
 }
 
 const names = {
-	Types.Amani : "Amoneeta",
-	Types.Xylo : "Phylosophers Cap",
-	Types.TreeDude : "Tree Dude"
+	Types.Amoneeto : "Amoneeto",
+	Types.Philosopher : "Philosophers Cap",
+	Types.TreeRot : "Tree Rot"
 }
 
-export var type = Types.Amani
-
-class Flags:
-	const near_water = "near_water"
-	const near_tree_1 = "near_tree_1"
-
-var flags : Dictionary = { }
+export var type = Types.Amoneeto
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	Flags.near_water
+const near_water = "growing near water"
+const under_pine = "growing under Pine"
+
+export var attributes : Dictionary = { 
+	near_water : false,
+	under_pine : false
+}
 
 
-func pick_up(picker):
+func interaction():
+	return str("[E] Pick Up ", names[type])
+
+func interact(picker):
 	get_parent().remove_child(self)
+	$CollisionShape.disabled = true
 	picker.mushrooms.add(self)

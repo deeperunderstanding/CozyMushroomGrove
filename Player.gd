@@ -76,14 +76,13 @@ func _process(d):
 
 	if $Yaw/Camera/InteractionRay.is_colliding():
 		var x = $Yaw/Camera/InteractionRay.get_collider()
-		if x.has_method("pick_up"):
-			$DebugUI/interaction.set_text("[F]  Pick up: " + x.get_name())
-		elif x.has_method("interact"):
-			$DebugUI/interaction.set_text("[E]  Interact with: " + x.get_name())
+
+		if x.has_method("interact"):
+			$"%BottomText".set_text(x.interaction())
 		else:
-			$DebugUI/interaction.set_text("")
+			$"%BottomText".set_text("")
 	else:
-		$DebugUI/interaction.set_text("")
+		$"%BottomText".set_text("")
 
 
 #######################################################################################################
@@ -209,7 +208,6 @@ func _process_movements(delta):
 
 	velocity = move_and_slide(velocity, Vector3(0, 1, 0), 0.05, 4, deg2rad(MAX_SLOPE_ANGLE))
 
-	throwing(delta)
 
 #######################################################################################################
 # MOVEMENT ON LADDER
@@ -256,7 +254,6 @@ func _process_on_ladder(delta):
 	# move
 	move_and_slide(velocity)
 
-	throwing(delta)
 
 
 #######################################################################################################
@@ -283,20 +280,13 @@ func _input(event):
 
 	if Input.is_key_pressed(KEY_R):
 		get_tree().reload_current_scene()
-
-	# If already carries an object - release it, otherwise (if ray is colliding) pick an object up
-	if Input.is_action_just_pressed("pick_up"):
-
-		if $Yaw/Camera/InteractionRay.is_colliding():
-			var x = $Yaw/Camera/InteractionRay.get_collider()
-			if x.has_method("pick_up"):
-				x.pick_up(self)
 		
-
 	# Hold Left Mouse Button (LMB) to throw carried object
 	if Input.is_action_just_released("LMB"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+		OS.window_fullscreen = true
 
 
 	_interact()
@@ -305,12 +295,9 @@ func _input(event):
 	
 
 func _interact():
-	# Interact
 	if Input.is_action_just_pressed("interact"):
 		if $Yaw/Camera/InteractionRay.is_colliding():
 			var x = $Yaw/Camera/InteractionRay.get_collider()
-			print("COLLIDING")
-			print(x.get_name())
 			if x.has_method("interact"):
 				x.interact(self)
 				
@@ -327,23 +314,7 @@ func _crouch():
 			if !($ceiling_check.is_colliding()):
 				$crouching.play_backwards("crouch")
 				move_speed = run_speed
-			else:
-				show_message("I cannot stand here.", 2)
-	
-
-#######################################################################################################
-# OTHER
-#######################################################################################################
-
-# LADDER
-func _on_Area_body_entered(body):
-	if body.name == "Player":
-		on_ladder = true
-
-func _on_Area_body_exited(body):
-	if body.name == "Player":
-		on_ladder = false
-
+		
 
 # CROUCHING ANIM
 func _on_crouching_animation_finished(anim_name):
@@ -358,25 +329,8 @@ func impulse(vector_towards, power, time):
 	for x in range(time * 100):
 		velocity += vector_towards * Vector3(power, power, power)
 
-# THROW STUFF
-func throwing(delta):
-	if carried_object != null:
-		if Input.is_action_pressed("LMB"):
-			if throw_power <= 250:
-				throw_power += 2
+
 				
-func get_item_holder():
-	return $Yaw/Camera/PlayerArm/Armature/Skeleton/HandPos
-
-
-# SHOW A MESSAGE ON SCREEN
-func show_message(text, time):
-	$message.set_text(text)
-	$message/Timer.set_wait_time(time)
-	$message/Timer.start()
-	yield($message/Timer, "timeout")
-	$message.set_text("")
-
 
 func _on_HighQuality_body_entered(body):
 	if body.has_method("set_quality_high"):

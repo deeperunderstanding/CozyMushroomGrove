@@ -17,5 +17,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.505301, 0 )
 shape = SubResource( 1 )
 
 [node name="Mushroom_Test1" type="MeshInstance" parent="."]
+cast_shadow = 0
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 3 )

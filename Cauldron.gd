@@ -1,4 +1,5 @@
 extends StaticBody
+class_name Cauldron
 
 signal recipe_success
 signal recipe_failure
@@ -6,6 +7,9 @@ signal recipe_failure
 var interacting = false
 
 var recipe = Recipes.Recipe.new()
+
+func interaction():
+	return "[E] Drop Mushroom into Cauldron"
 
 func interact(actor):
 	if not interacting:

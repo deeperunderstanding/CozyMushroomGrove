@@ -1,9 +1,8 @@
-extends Reference
 class_name Recipes
 
 enum RecipeState { CONTINUE, SUCCESS, FAILURE }
 
-class Recipe:
+class Recipe extends Reference:
 	func validate(mushroom):
 		pass
 		
@@ -94,3 +93,75 @@ class OrderedQuantityRecipe extends Recipe:
 			lines.append(str(count) + "x " + Mushroom.names[type])
 			return lines
 		
+		
+class AttributeRecipePart extends Reference:
+	
+	var quantity = 0
+	var type = Mushroom.Types.Amoneeto
+	var attributes = []
+	
+	func _init(_quantity : int, _type : int, _attributes : Array):
+		quantity = _quantity
+		type = _type
+		attributes = _attributes
+		
+		
+	func validate(mushroom : Mushroom):
+		if mushroom.type == type:
+			
+			var matching = 0
+			for key in attributes:
+				if mushroom.attributes[key]:
+					matching += 1
+			
+			if matching == attributes.size():
+				quantity -= 1
+				return true
+			else:
+				return false
+					
+		else:
+			return false
+			
+	
+		
+class QuantityWithAttributeRecipe extends Recipe:
+	
+	var recipe = null
+	var name = ""
+	
+	func _init(recipe_list : Array, _name = null):
+		recipe = recipe_list
+		name = _name
+		
+	func validate(mushroom):
+		var validated = false
+		for line in recipe:
+			validated = line.validate(mushroom)
+			if validated:
+				break
+				
+		if not validated:
+			return RecipeState.FAILURE
+				
+		var finished = 0
+		for line in recipe:
+			if line.quantity == 0:
+				finished += 1
+		
+		if finished == recipe.size():
+			return RecipeState.SUCCESS
+		else:
+			return RecipeState.CONTINUE
+		
+			
+	func text_lines():
+		var lines = []
+		lines.append("Recipe: ")
+		lines.append(name)
+		lines.append(false)
+		for part in recipe:
+			lines.append(str(part.quantity) + "x " + Mushroom.names[part.type])
+			for att in part.attributes:
+				lines.append(str("	- " + att))
+		return lines
