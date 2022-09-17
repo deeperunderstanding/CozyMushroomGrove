@@ -6,6 +6,10 @@ signal next
 signal done
 
 var recipes = [
+	Recipes.OrderedQuantityWithAttributeRecipe.new([
+		Recipes.AttributeRecipePart.new(1, Mushroom.Types.Philosopher, [Mushroom.under_pine]),
+		Recipes.AttributeRecipePart.new(1, Mushroom.Types.TreeRot, [Mushroom.near_water])
+	], "Deine Mudda"),
 	Recipes.SimpleQuantityRecipe.new({
 		Mushroom.Types.Philosopher : 1,
 		Mushroom.Types.Amoneeto : 2

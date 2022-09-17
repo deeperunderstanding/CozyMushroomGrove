@@ -4,14 +4,15 @@ class_name Mushroom
 onready var collision_shape = $CollisionShape
 
 enum Types {
-	Philosopher, Amoneeto, TreeRot, FireGoblet
+	Philosopher, Amoneeto, TreeRot, FireGoblet, RainbowRot
 }
 
 const names = {
 	Types.Amoneeto : "Amoneeto",
 	Types.Philosopher : "Philosophers Cap",
 	Types.TreeRot : "Tree Rot",
-	Types.FireGoblet : "Fire Goblet"
+	Types.FireGoblet : "Fire Goblet",
+	Types.RainbowRot : "Rainbow Rot"
 }
 
 export var type = Types.Amoneeto

@@ -165,3 +165,46 @@ class QuantityWithAttributeRecipe extends Recipe:
 			for att in part.attributes:
 				lines.append(str("	- " + att))
 		return lines
+		
+		
+class OrderedQuantityWithAttributeRecipe extends Recipe:
+	
+	var recipe = null
+	var name = ""
+	
+	func _init(recipe_list : Array, _name = null):
+		recipe = recipe_list
+		name = _name
+		
+	func validate(mushroom):
+		var part = recipe[0]
+		var valid = false
+		
+		if part:
+			valid = part.validate(mushroom)
+		
+		if part.quantity == 0:
+			recipe.pop_front()
+		
+		if valid:
+			if recipe.size() > 0:
+				return RecipeState.CONTINUE
+			else:
+				return RecipeState.SUCCESS
+		else:	
+			return RecipeState.FAILURE
+				
+	
+	func text_lines():
+		var lines = []
+		lines.append("Recipe: ")
+		lines.append(name)
+		lines.append(false)
+		for part in recipe:
+			lines.append(str(part.quantity) + "x " + Mushroom.names[part.type])
+			for att in part.attributes:
+				lines.append(str("	- " + att))
+				
+		lines.append(false)
+		lines.append("ADD IN ORDER!")
+		return lines
