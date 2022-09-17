@@ -8,7 +8,7 @@ var throw_power = 0
 
 var interactor = null
 
-onready var mushrooms = $Mushrooms
+onready var mushrooms = $"%Mushrooms"
 
 # this was supposedd to be for fall damage, not sure if works
 var last_floor_height
@@ -300,6 +300,9 @@ func _interact():
 			var x = $Yaw/Camera/InteractionRay.get_collider()
 			if x.has_method("interact"):
 				x.interact(self)
+				
+	if Input.is_action_just_pressed("drop"):
+		mushrooms.drop()
 				
 func _crouch():
 	# Crouching

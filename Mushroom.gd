@@ -1,14 +1,17 @@
 extends StaticBody
 class_name Mushroom
 
+onready var collision_shape = $CollisionShape
+
 enum Types {
-	Philosopher, Amoneeto, TreeRot
+	Philosopher, Amoneeto, TreeRot, FireGoblet
 }
 
 const names = {
 	Types.Amoneeto : "Amoneeto",
 	Types.Philosopher : "Philosophers Cap",
-	Types.TreeRot : "Tree Rot"
+	Types.TreeRot : "Tree Rot",
+	Types.FireGoblet : "Fire Goblet"
 }
 
 export var type = Types.Amoneeto

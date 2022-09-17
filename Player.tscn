@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://MushroomReceiver.gd" type="Script" id=2]
+[ext_resource path="res://MushroomHolder.tscn" type="PackedScene" id=2]
 [ext_resource path="res://DebugUI.gd" type="Script" id=3]
 [ext_resource path="res://PlayerArm.tscn" type="PackedScene" id=4]
 [ext_resource path="res://SkeletonIKAutoStart.gd" type="Script" id=5]
@@ -229,6 +229,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02655, -0.624282 )
 enabled = true
 cast_to = Vector3( 0, -0.5, 0 )
 
+[node name="Mushrooms" parent="Yaw" instance=ExtResource( 2 )]
+
 [node name="crouching" type="AnimationPlayer" parent="."]
 anims/crouch = SubResource( 6 )
 
@@ -299,10 +301,6 @@ margin_bottom = 122.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Mushrooms" type="Spatial" parent="."]
-transform = Transform( 0.999824, -0.0187437, 0, 0.0187437, 0.999824, 0, 0, 0, 1, 0, 2.99818, -2.5121 )
-script = ExtResource( 2 )
 
 [node name="UI" type="MarginContainer" parent="."]
 anchor_right = 1.0

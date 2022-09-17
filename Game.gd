@@ -9,9 +9,9 @@ var game_time = 0
 
 var queued_text = [
 	str(
-		"Move with W,A,S,D", "\n",
-		"Mouse to Look around", "\n",
-		"E to Interact"
+		"Use the [W,A,S,D] Keys to move around", "\n",
+		"Use the [Mouse] to look around", "\n",
+		"Use [E] to Interact"
 	),
 	str(
 		"Collect the mushrooms from the recipe", "\n",

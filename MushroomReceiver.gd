@@ -18,3 +18,15 @@ func pop():
 	if mushroom:
 		pass#remove_child(mushroom)
 	return mushroom
+
+func drop():
+	var mushroom : Spatial = _queue.pop_back()
+	if mushroom:
+		$RayCast.force_raycast_update()
+		var point = $RayCast.get_collision_point()
+		var collider = $RayCast.get_collider()
+		if collider:
+			get_tree().current_scene.add_child(mushroom)
+			mushroom.global_transform.origin = point
+			mushroom.collision_shape.disabled = false
+			mushroom.visible = true
